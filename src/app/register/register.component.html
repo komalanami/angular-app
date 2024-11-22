@@ -1,0 +1,38 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="formstyle">
+    <p>First Name:
+        <mat-form-field class="full-width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="firstname" type="text">
+        </mat-form-field>
+    </p>
+
+    <p>Last Name:
+        <mat-form-field class="full-width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="lastname" type="text">
+        </mat-form-field>
+    </p>
+
+    <p>Email:
+        <mat-form-field class="full-width">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email">
+        </mat-form-field>
+    </p>
+
+    <p>Phone Number:
+        <mat-form-field class="full-width">
+            <mat-label>Phone Number</mat-label>
+            <input matInput formControlName="phonenumber" type="number">
+        </mat-form-field>
+    </p>
+
+    <p>Password:
+        <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password">
+        </mat-form-field>
+    </p>
+
+    <button type="submit" class="btn">Submit</button>
+</form>

@@ -1,0 +1,11 @@
+.formstyle{
+    text-align: center;
+}
+
+.form-control{
+    width:auto;
+    .mat-form-field{
+     width: 100%;
+    }
+}
+

@@ -1,0 +1,8 @@
+/* You can add global styles to this file, and also import other style files */
+// Optional: Customize Bootstrap variables before importing
+$primary: #007bff; // Example: Change primary color to blue
+
+// Import Bootstrap SCSS
+@import "../node_modules/bootstrap/scss/bootstrap";
+// @import url(https://unpkg.com/browse/bootstrap@4.1.0/dist/css/bootstrap.min.css);
+
