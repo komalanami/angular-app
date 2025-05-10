@@ -11,14 +11,14 @@ export class HelloWorldBean{
 export class WelcomeDataService {
   private apiUrl = 'http://localhost:8080/hello-world-bean';
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 
-  executeHelloWorldBeanService(){
+  executeHelloWorldBeanService() {
     return this.http.get<HelloWorldBean>(this.apiUrl);
   }
-
-  executeHelloWorldServicewithParameter(username: string){
+  
+  executeHelloWorldServicewithParameter(username: string) {
     return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world/${username}`);
   }
 

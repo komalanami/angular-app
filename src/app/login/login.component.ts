@@ -6,7 +6,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
-import { HardcodedAuthenticationService } from '../service/hardcoded-authentication.service';
+import { BasicAuthService } from '../service/http/basic-auth.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -15,16 +17,18 @@ import { HardcodedAuthenticationService } from '../service/hardcoded-authenticat
   imports: [
     MatToolbarModule,MatButtonModule,
     MatIconModule,ReactiveFormsModule,
-    MatFormFieldModule,MatIconModule,MatCardModule],
-  providers:[FormBuilder],
+    MatFormFieldModule,MatIconModule,MatCardModule,HttpClientModule,NgIf],
+  providers:[FormBuilder,HttpClientModule,HttpClient,BasicAuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  invalidLogin = false;
+  errorMessage = "Invalid Credentials";
 
-  constructor(private fb:FormBuilder,private router :Router
-    ,public hardcodedAuthenticationService : HardcodedAuthenticationService
+  constructor(private fb:FormBuilder,private router :Router, 
+    public BasicAuthService: BasicAuthService
   ){
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -32,15 +36,19 @@ export class LoginComponent {
     });
   }
 
+  handleLogin() {
 
-  onSubmit(): void {
-    const username = this.loginForm.get('username')?.value;
-    const password = this.loginForm.get('password')?.value;
-
-    if (this.hardcodedAuthenticationService.authenticator(username, password)) {
-      this.router.navigate(['welcome',username]);
-    } else {
-      console.log('Invalid Credentials');
-    }
+    this.BasicAuthService.executeAuthenticationService(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
+        .subscribe({
+          next: data => {
+            console.log(data);
+            this.router.navigate(['welcome', this.loginForm.get('username')?.value]);
+            this.invalidLogin = false;
+          },
+          error: error => {
+            // console.log(error);
+            this.invalidLogin = true;
+          }
+        });
   }
 }

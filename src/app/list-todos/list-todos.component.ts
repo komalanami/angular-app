@@ -8,44 +8,55 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-list-todos',
   standalone: true,
-  imports: [NgFor,DatePipe,UpperCasePipe,HttpClientModule],
+  imports: [NgFor, DatePipe, UpperCasePipe, HttpClientModule],
   providers: [TodoDataService],
   templateUrl: './list-todos.component.html',
   styleUrl: './list-todos.component.scss'
 })
-export class ListTodosComponent implements OnInit{
+export class ListTodosComponent implements OnInit {
 
+  todos: Todo[] = [];
+  message : String = '';
 
-  todos : Todo[] =[]
-  //   new Todo(1,'Learn to Dance',false ,new Date()),
-  //   new Todo(2,'Become an expert in singing',false ,new Date()),
-  //   new Todo(1,'Visit India',false ,new Date()),
-   
-  // ]
-  // todo={
-  //   id :1 ,
-  //   description :'Learn to Dance'
-  // };
-
-  constructor(private todoservice:TodoDataService ,private router :Router ){}
+  constructor(private todoservice: TodoDataService, private router: Router) {}
 
   ngOnInit() {
-   this.todoservice.retrieveAllTodos('shan').subscribe({
-    next :response =>{
-      console.log(response);
-      this.todos=response;
-    },
-   }
-   );
+    this.todoservice.retrieveAllTodos('shan').subscribe({
+      next: response => {
+        console.log(response);
+        this.todos = response;
+      },
+    });
   }
 
-  onupdate(id:number) {
-    console.log('Update clicked',id);
-    this.router.navigate(['todos',id]);
+  onupdate(id: number) {
+    console.log('Update clicked', id);
+    this.router.navigate(['todos', id]);
   }
 
-  ondelete(id:number) {
-    console.log('Delete clicked');
+  ondelete(id: number) {
+    console.log(`delete todo ${id}`)
+    this.todoservice.deleteTodo('shan', id).subscribe(
+      response => {
+        console.log(response);
+        this.message = `Delete of Todo ${id} Successful!`;
+        this.refreshTodos();
+      }
+    )
+  }
+
+  addTodo() {
+    console.log('Add clicked');
+    this.router.navigate(['todos', -1]);
+  }
+
+  refreshTodos() {
+    this.todoservice.retrieveAllTodos('shan').subscribe(
+      response => {
+        console.log(response);
+        this.todos = response;
+      }
+    )
   }
 
 }

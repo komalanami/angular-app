@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
 
 @NgModule({
   declarations: [],
   imports: [
     BrowserModule,
-    HttpClientModule, // Add HttpClientModule here
+    HttpClientModule,// Add HttpClientModule here
   ],
-  providers: []
+  providers: [HttpClient]
 })
 export class AppModule { }
