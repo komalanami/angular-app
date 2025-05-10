@@ -1,0 +1,9 @@
+{
+  // ...existing settings...
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "true"
+  },
+  "javascript.preferences.importModuleSpecifier": "relative"
+}
