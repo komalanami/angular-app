@@ -38,7 +38,7 @@ export class LoginComponent {
 
   handleLogin() {
 
-    this.BasicAuthService.executeAuthenticationService(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
+    this.BasicAuthService.executeJWTAuthenticationService(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
         .subscribe({
           next: data => {
             console.log(data);

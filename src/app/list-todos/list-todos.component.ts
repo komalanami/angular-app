@@ -38,8 +38,8 @@ export class ListTodosComponent implements OnInit {
     console.log(`delete todo ${id}`)
     this.todoservice.deleteTodo('shan', id).subscribe(
       response => {
-        console.log(response);
         this.message = `Delete of Todo ${id} Successful!`;
+        console.log(response);
         this.refreshTodos();
       }
     )
